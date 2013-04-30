@@ -63,7 +63,7 @@ function filterPosts(whiteList) {
 // Hide the visited posts on the current page that match entries in the user history
 function hidePost(post, delay) {
 	setTimeout(function() {
-		$(".title[href='" + post + "']").parent().parent().css('background-color', 'green');
+		$(".title[href='" + post + "']").parent().parent().find('.hide-button a').click();
 		return (function(){
 			setTimeout(function(){
 				if (count > delay) {
