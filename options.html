@@ -1,7 +1,7 @@
 <html>
 <head><title>Options</title></head>
 <style type="text/css">
-.frame{
+.frame, .frame ~ .status{
 	display: inline-block;
 	background: #cee3f8;
 	padding: 10px;
@@ -9,13 +9,11 @@
 	border-radius: 3px;
 }
 .frame h1{margin-top:0}
-.frame .status {
-	background: aliceblue;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	padding: 1px;
+.frame ~ .status {
+	margin: 8px 0;
 	display: none;
-	border: 1px solid;
+	height: auto;
+	width: auto;
 }
 button+button{float:right}
 </style>
@@ -24,15 +22,14 @@ button+button{float:right}
 <h1>Whitelist:</h1>
 <h3>Enter a comma-separated list of subreddits to exclude from being hidden</h3>
 <h5>eg. pics, cats, funny</h5>
-
 <input id="subs" style="min-width:300px">
-
 <br />
-<div class="status"></div>
 <br />
 <button id="save">Save</button>
 <button id="del">Delete whitelist</button>
 </div>
+<br />
+<div class="status"></div>
 </body>
 
 <script src="options.js"></script>

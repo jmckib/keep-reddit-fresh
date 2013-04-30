@@ -7,11 +7,11 @@ function save_options() {
 	}
 	chrome.storage.sync.set({whiteList: sublist});
 	var status = document.querySelector('.status');
-	status.setAttribute('style','inline-block');
-	status.innerHTML = "Options Saved.";
+	status.setAttribute('style','display: inline-block');
+	status.textContent = "Saved";
 	setTimeout(function() {
 		status.style.display = 'none';
-	}, 2000);
+	}, 2500);
 }
 
 function restore_options() {
@@ -25,7 +25,14 @@ function restore_options() {
 }
 
 function delete_options() {
-	chrome.storage.sync.remove('whiteList', function(){console.log( "DESTROYED!" );});
+	chrome.storage.sync.remove('whiteList', function(){
+		var status = document.querySelector('.status');
+		status.setAttribute('style','display: inline-block');
+		status.innerHTML = "Deleted";
+		setTimeout(function() {
+			status.style.display = 'none';
+		}, 2500);
+	});
 }
 
 document.addEventListener('DOMContentLoaded', restore_options);
