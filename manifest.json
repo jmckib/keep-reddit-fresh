@@ -1,0 +1,33 @@
+{
+  "name": "Reddit hide visited",
+  "version": "1.0",
+  "description": "Hide visited links with one click.",
+  "page_action": {
+    "default_icon": "reddit.png",
+    "default_title": "Click to hide visited links"
+  },
+  "content_scripts": [{
+    "js": ["jquery-2.0.0.min.js", "script.js"],
+    "css": ["main.css"],
+    "matches": ["http://reddit.com/*", "https://reddit.com/*", "http://*.reddit.com/*", "https://*.reddit.com/*"],
+    "run_at": "document_start"
+  }],
+  "permissions": [
+    "tabs",
+    "history",
+    "storage",
+    "http://reddit.com/*",
+    "https://reddit.com/*",
+    "http://*.reddit.com/*",
+    "https://*.reddit.com/*",
+    "http://*/",
+    "https://*/"],
+  "background": {
+    "scripts": ["jquery-2.0.0.min.js", "background.js"]
+  },
+  "icons": {
+    "48": "reddit.png"
+  },
+  "options_page": "options.html",
+  "manifest_version": 2
+}

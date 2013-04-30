@@ -1,0 +1,14 @@
+.notifyDiv {
+	position: fixed;
+	bottom: 1em;
+	right: 1em;
+	display: inline-block;
+	padding: 10px;
+	display: none;
+	background: #f0f3fc;
+	box-shadow: 2px 2px 15px 3px #222;
+	font-size: larger;
+	border-bottom: 1px solid #222;
+	border-right: 1px solid #222;
+	font-weight: bold;
+}

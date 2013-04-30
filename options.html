@@ -1,0 +1,40 @@
+<html>
+<head><title>Options</title></head>
+<style type="text/css">
+.frame{
+	display: inline-block;
+	background: #cee3f8;
+	padding: 10px;
+	border: 1px solid;
+	border-radius: 3px;
+}
+.frame h1{margin-top:0}
+.frame .status {
+	background: aliceblue;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 1px;
+	display: none;
+	border: 1px solid;
+}
+button+button{float:right}
+</style>
+<body>
+<div class="frame">
+<h1>Whitelist:</h1>
+<h3>Enter a comma-separated list of subreddits to exclude from being hidden</h3>
+<h5>eg. pics, cats, funny</h5>
+
+<input id="subs" style="min-width:300px">
+
+<br />
+<div class="status"></div>
+<br />
+<button id="save">Save</button>
+<button id="del">Delete whitelist</button>
+</div>
+</body>
+
+<script src="options.js"></script>
+
+</html>
