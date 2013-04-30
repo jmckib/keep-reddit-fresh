@@ -5,12 +5,13 @@ $(document).ready(function(){
 	document.body.appendChild(modal);
 });
 
-var delay = 500, count = 500;
+var delay, count;
 
 chrome.runtime.onMessage.addListener(
 function(request, sender) {
 	var r = request;
 	if (r.type === 'whiteList') {
+		delay = 500, count = 500;
 		filterPosts(r.req.whiteList);
 	}
 	if (r.type === 'history') {
