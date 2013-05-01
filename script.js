@@ -89,6 +89,6 @@ function notifyHidden(done){
 	if (done) {
 		$('.notifyDiv').delay(600).fadeOut(600);
 	} else {
-		$('.notifyDiv').delay(100).fadeIn(300);
+		$('.notifyDiv').fadeIn(300);
 	}
 }

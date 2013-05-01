@@ -36,13 +36,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 		len;
 	if (request.type === 'history' && reqQuery.length) {
 		for (i = 0, len = reqQuery.length; i < len; i += 1) {
-			chrome.history.getVisits({
-				url: reqQuery[i]
+			chrome.history.search({
+				text: reqQuery[i]
 			}, function (query) {
 				if (query !== 'undefined') {
 					if (query.length) {
 						chrome.tabs.sendMessage(senderTab, {
-							historyMatch: this.args[0].url,
+							historyMatch: this.args[0].text,
 							type: 'history'
 						});
 					}
