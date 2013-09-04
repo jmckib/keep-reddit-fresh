@@ -1,14 +1,42 @@
 .notifyDiv {
 	position: fixed;
-	bottom: 1em;
+	bottom: -5em;
 	right: 1em;
 	display: inline-block;
 	padding: 10px;
-	display: none;
 	background: #f0f3fc;
 	box-shadow: 2px 2px 15px 3px #222;
-	font-size: larger;
+	font-size: medium;
 	border-bottom: 1px solid #222;
 	border-right: 1px solid #222;
 	font-weight: bold;
+	opacity: 0;
+	overflow: hidden;
+}
+
+.notifyDiv span { display: block; }
+
+.notifyDiv span + span:before {
+	content: '\2022';
+	visibility: hidden;
+	letter-spacing: -1em;
+}
+
+.notifyDiv span + span { margin: 1em 0 .5em; }
+
+#counter { text-align: center; }
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  bottom: 1em;
+  transition: opacity .5s, bottom .5s;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  bottom: -5em;
+  transition: visibility 1s 1s,
+  				opacity 1s 1s,
+  				bottom 1s 1s;
 }
