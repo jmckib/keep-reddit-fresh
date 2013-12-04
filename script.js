@@ -1,11 +1,9 @@
 "use strict";
 
-var linksCount = 0, // store total count of links on page
-	matchCount = 0, // counter for returned requests from history
-	matchPool = [], // keep track of links on the page that were found in history
-	re = /^\/r\//,
-	links = [],
-	r, modal, counter, label, i, _i, len, link, commentsLink, _len, post, evt
+var re = /^\/r\//,
+	links = [], toHide = [],
+	r, modal, counter, label, i, _i, len, _len, link, hideBtn,
+	commentsLink, post, evt, matches, linksCount, linkList,
 
 	// Insert modal for displaying message-hiding count
 	modal = document.createElement('div'),
@@ -22,49 +20,45 @@ var linksCount = 0, // store total count of links on page
 // Process messages from the background page
 chrome.runtime.onMessage.addListener(function( request, sender ) {
 	r = request;
-	if ( r.type !== 'whiteList' ) matchCount++;
-	if ( r.type === 'whiteList' ) {
-		filterPosts( r.req.whiteList );
-		document.getElementById('counter').textContent = '';
-		showModal();
-	}
-	if ( r.type === 'history' ) matchPool.push( r.historyMatch );
-	if ( ( matchCount >= linksCount ) && matchPool.length ) {
-		processMatches( matchPool );
-	} else if ( ( matchCount >= linksCount ) && !matchPool.length ) {
+	if ( r.matches && r.matches.length === 0 ) {
 		document.getElementById('counter').textContent = 'No visited posts';
 		setTimeout( hideModal, 1000 );
 	}
+	if ( r.type === 'whiteList' ) {
+		showModal();
+		filterPosts( r.req.whiteList );
+		document.getElementById('counter').textContent = '';
+	} else {
+		processMatches( r.matches );
+	}
 });
 
+//
 function processMatches( matches ) {
-	// Strip the location.origin so that text post hrefs match the history entry
-	matches.forEach(function( ele, ind ) {
-		if ( ele.match( location.origin ) ) {
-			matches[ind] = ele.replace( location.origin, '' );
+	matches.forEach(function( ele ) {
+		for ( i = 0, len = linkList.length; i < len; i += 1 ){
+			if ( ele === linkList[i].href ){
+				toHide.push(linkList[i]);
+			}
 		}
 	});
-	hidePost( matches );
+	hidePost( toHide );
 }
 
 // Hide the visited posts on the current page that match entries in the user history
-function hidePost( matches ) {
-	matches = Array.prototype.slice.call( matches, 0 );
+function hidePost( toHide ) {
 	modal = document.querySelector('.notifyDiv'),
 	counter = document.getElementById('counter');
-	showModal();
-	matches.forEach(function( ele, ind ) {
+	toHide.forEach(function( ele, ind ) {
 		// setTimeout here to give a breather in between hiding posts
 		setTimeout(function () {
-			counter.textContent = 'Hiding ' + (ind+1) + ' of ' + matchPool.length;
-			post = '.title[href="' + ele + '"]';
-			post = document.querySelector(post);
-			if ( post ) {
-				post = post.parentNode.parentNode.querySelector('.hide-button a');
-				click( post );
-			}
-			if ( ind === matchPool.length-1 ) {
-				// Done processing links - hide modal
+			counter.textContent = 'Hiding ' + ( ind + 1 ) + ' of ' + toHide.length;
+			hideBtn = ele.parentNode.parentNode.querySelector('.hide-button a');
+			click( hideBtn );			//click( post );
+			if ( ind === toHide.length-1 ) {
+				// Done processing links - hide modal and reset arrays
+				console.log( "DONE" );
+				linkList = links = matches = toHide = [];
 				hideModal();
 			}
 		}, 1000 * ind);
@@ -73,8 +67,8 @@ function hidePost( matches ) {
 
 // Filter out any posts from whitelisted subreddits
 function filterPosts( whiteList ) {
-	links = document.querySelectorAll('.linklisting .link:not(.hidden) a.title');
-	links = Array.prototype.slice.call( links, 0 );
+	linkList = document.querySelectorAll('.linklisting .link:not(.hidden):not(.RESFiltered) a.title');
+	links = Array.prototype.slice.call( linkList, 0 );
 	// Take self post links, which point directly to /r/subreddit and prepend
 	// the protocol/host so that it's a valid URL to pass to chrome.history
 	links.forEach(function( ele, ind ) {
@@ -120,15 +114,12 @@ function queryHistory( links ) {
 function hideModal() {
 	setTimeout(function(){
 		modal.classList.remove('visible');
-		modal.classList.add('hidden');
-	}, 1000);
-	// Reset vars in case of future passes
-	matchPool = [];
-	linksCount = matchCount = i = _i = len = _len = 0;
+		modal.classList.add('notVisible');
+	}, 1500);
 }
 
 function showModal() {
-	modal.classList.remove('hidden');
+	modal.classList.remove('notVisible');
 	modal.classList.add('visible');
 }
 

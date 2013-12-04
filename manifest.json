@@ -1,31 +1,25 @@
 {
-  "name": "Reddit hide visited",
-  "version": "1.1.0",
-  "description": "Hide visited links with one click.",
-  "page_action": {
-    "default_icon": "reddit.png",
-    "default_title": "Click to hide visited links"
-  },
-  "content_scripts": [{
-    "js": ["script.js"],
-    "css": ["main.css"],
-    "matches": ["http://reddit.com/", "https://reddit.com/", "http://*.reddit.com/", "https://*.reddit.com/", "http://*.reddit.com/r/*", "https://*.reddit.com/r/*", "http://*.reddit.com/r/*/*/", "https://*.reddit.com/r/*/*"],
-    "run_at": "document_end"
-  }],
-  "permissions": [
-    "tabs",
-    "history",
-    "storage",
-    "http://reddit.com/*",
-    "https://reddit.com/*",
-    "http://*.reddit.com/*",
-    "https://*.reddit.com/*"],
-  "background": {
-    "scripts": ["background.js"]
-  },
-  "icons": {
-    "48": "reddit.png"
-  },
-  "options_page": "options.html",
-  "manifest_version": 2
+   "background": {
+      "scripts": [ "background.js" ]
+   },
+   "content_scripts": [ {
+      "css": [ "main.css" ],
+      "js": [ "script.js" ],
+      "matches": [ "http://reddit.com/", "https://reddit.com/", "http://*.reddit.com/", "https://*.reddit.com/", "http://*.reddit.com/r/*", "https://*.reddit.com/r/*", "http://*.reddit.com/r/*/*/", "https://*.reddit.com/r/*/*" ],
+      "run_at": "document_end"
+   } ],
+   "description": "Hide visited links with one click.",
+   "icons": {
+      "48": "reddit.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv6UvPjDbRTnEF5K+H6YBtNJfpp1Yn2xqzeAJkLfWASFOP0dJZjim7he/ZQCrIcP20OGwHRvdzdrN9AXxBE161aFqej5v3e61hhHiLhiBUBMZLmJp/LhhbzpKO8ZctB2DMvKllSs/P5SNE7FJ6QKvC4L5lm2DzNp+6BdHFzeZKnLpzD3O4tOkvJ9uYvaCMQ6OyHT4dfUqnZfYLkQ5/fr+g/wUKQMtlsdaxpG78QQ6DpQ5XMxE6wpGas57nrLaoSHYcvf8HfFCdnJub39nrxxCpOpBXUMcbiFXu2r29Md6bRkPm2+Abxe4TJbdcedT3ypRZuEZdt+y1vQ71hNG1HpmkwIDAQAB",
+   "manifest_version": 2,
+   "name": "Reddit hide visited",
+   "options_page": "options.html",
+   "page_action": {
+      "default_icon": "reddit.png",
+      "default_title": "Click to hide visited links"
+   },
+   "permissions": [ "tabs", "history", "storage", "http://reddit.com/*", "https://reddit.com/*", "http://*.reddit.com/*", "https://*.reddit.com/*" ],
+   "version": "1.2.1"
 }
