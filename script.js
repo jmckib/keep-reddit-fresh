@@ -57,7 +57,6 @@ function hidePost( toHide ) {
 			click( hideBtn );			//click( post );
 			if ( ind === toHide.length-1 ) {
 				// Done processing links - hide modal and reset arrays
-				console.log( "DONE" );
 				linkList = links = matches = toHide = [];
 				hideModal();
 			}

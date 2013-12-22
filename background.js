@@ -30,8 +30,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 		i, len;
 	reqQuery.forEach(function(url){
 		chrome.history.getVisits({'url': url}, function(item) {
-			console.log( "URL: " + url );
-			console.dir( item );
 			checked++;
 			if (item.length) visited.push(url);
 			if (checked === reqQuery.length) {
