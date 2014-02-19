@@ -19,21 +19,25 @@ var re = /^\/r\//,
 
 // Process messages from the background page
 chrome.runtime.onMessage.addListener(function( request, sender ) {
+
 	r = request;
+
 	if ( r.matches && r.matches.length === 0 ) {
 		document.getElementById('counter').textContent = 'No visited posts';
 		setTimeout( hideModal, 1000 );
 	}
-	if ( r.type === 'whiteList' ) {
+	if ( r.type === 'whiteList' && !document.querySelector('.notifyDiv.visible') ) {
 		showModal();
 		filterPosts( r.req.whiteList );
 		document.getElementById('counter').textContent = '';
-	} else {
+	}
+	if ( r.matches && r.matches.length && document.querySelector('.notifyDiv.visible') ) {
 		processMatches( r.matches );
 	}
+
 });
 
-//
+//  Prep posts that match history entries
 function processMatches( matches ) {
 	matches.forEach(function( ele ) {
 		for ( i = 0, len = linkList.length; i < len; i += 1 ){
@@ -98,7 +102,7 @@ function filterPosts( whiteList ) {
 
 	if ( links.length ) {
 		linksCount = links.length;
-		queryHistory(links);
+		queryHistory( links );
 	}
 }
 
