@@ -1,7 +1,7 @@
 "use strict";
 
 var re = /^\/r\//,
-	links = [], toHide = [],
+	links = [], toHide,
 	r, modal, counter, label, i, _i, len, _len, link, hideBtn,
 	commentsLink, post, evt, matches, linksCount, linkList,
 
@@ -13,36 +13,33 @@ var re = /^\/r\//,
 	label.textContent = 'Processing post(s)';
 	counter.id = 'counter';
 	counter.textContent = ''
-	modal.appendChild(label);
-	modal.appendChild(counter);
-	document.body.appendChild(modal);
+	modal.appendChild( label );
+	modal.appendChild( counter );
+	document.body.appendChild( modal );
 
 // Process messages from the background page
 chrome.runtime.onMessage.addListener(function( request, sender ) {
-
 	r = request;
-
+	toHide = [];
 	if ( r.matches && r.matches.length === 0 ) {
 		document.getElementById('counter').textContent = 'No visited posts';
 		setTimeout( hideModal, 1000 );
 	}
-	if ( r.type === 'whiteList' && !document.querySelector('.notifyDiv.visible') ) {
+	if ( r.type === 'whiteList' ) {
 		showModal();
 		filterPosts( r.req.whiteList );
 		document.getElementById('counter').textContent = '';
-	}
-	if ( r.matches && r.matches.length && document.querySelector('.notifyDiv.visible') ) {
+	} else {
 		processMatches( r.matches );
 	}
-
 });
 
-//  Prep posts that match history entries
+//
 function processMatches( matches ) {
 	matches.forEach(function( ele ) {
 		for ( i = 0, len = linkList.length; i < len; i += 1 ){
 			if ( ele === linkList[i].href ){
-				toHide.push(linkList[i]);
+				toHide.push( linkList[i] );
 			}
 		}
 	});
@@ -60,8 +57,7 @@ function hidePost( toHide ) {
 			hideBtn = ele.parentNode.parentNode.querySelector('.hide-button a');
 			click( hideBtn );			//click( post );
 			if ( ind === toHide.length-1 ) {
-				// Done processing links - hide modal and reset arrays
-				linkList = links = matches = toHide = [];
+				// Done processing links - hide modal
 				hideModal();
 			}
 		}, 1000 * ind);
@@ -84,12 +80,12 @@ function filterPosts( whiteList ) {
 		for ( i = 0, len = whiteList.length; i < len; i += 1 ) {
 			_len = links.length
 			//Take the bare subreddit name and prepend '/r/'
-			whiteList[i] = new RegExp('reddit.com\/r\/' + whiteList[i], 'i');
+			whiteList[i] = new RegExp( 'reddit.com\/r\/' + whiteList[i], 'i' );
 			while (_len--) {
 				// Find the href of the comments link relative to the current link
 				commentsLink = links[_len].parentNode.parentNode.querySelector('.comments').href;
 				// Splice out any links that match whitelisted subreddits
-				if ( whiteList[i].test(commentsLink) ) {
+				if ( whiteList[i].test( commentsLink ) ) {
 					links.splice( _len, 1 );
 				}
 			}
@@ -128,6 +124,6 @@ function showModal() {
 
 function click( ele ){
 	evt = document.createEvent('MouseEvents');
-	evt.initMouseEvent('click', true, true, window, 0, 1, 1, 1, 1, false, false, false, false, 0, null);
+	evt.initMouseEvent( 'click', true, true, window, 0, 1, 1, 1, 1, false, false, false, false, 0, null );
 	ele.dispatchEvent( evt );
 }
