@@ -1,7 +1,7 @@
 Keep Reddit Fresh
 ===================
 
-A chrome extention that hides visited reddit posts. Works with RES never ending scroll.
+A chrome extention that hides visited reddit posts. Works with RES never ending scroll. Install at https://chrome.google.com/webstore/detail/keep-reddit-fresh/ofkgdgockgfdgmiglgoieibaoaplkdbc
 
 This extension works by automatically clicking the 'hide' button beneath reddit posts
 that are already in your browser history. If you're using RES, there is a few seconds delay
