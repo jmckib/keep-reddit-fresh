@@ -1,27 +1,7 @@
 'use strict';
-var re = /^https?:\/\/(?:[a-z]+)\.reddit\.com\/(?!search)(?!user)(?!prefs)(?!message)(?!r\/mod)(?!friends)(?:r\/[a-z0-9]+\/)??(?:r\/[a-z0-9]+(?:\/(?:comments)?(?:submit)?\/.*))?/i;
 
-function checkForValidUrl(tabId, changeInfo, tab) {
-	if (re.test(tab.url)) {
-		chrome.pageAction.show(tabId);
-	}
-}
-
-chrome.pageAction.onClicked.addListener(function (tab) {
-	chrome.storage.sync.get('whiteList', function (query) {
-		chrome.tabs.sendMessage(tab.id, {
-			req: query,
-			type: 'whiteList'
-		});
-	});
-});
-
-chrome.tabs.onUpdated.addListener(function (tabid, changeinfo, tab) {
-	if (changeinfo.status === 'complete') {
-		checkForValidUrl(tabid, changeinfo, tab);
-	}
-});
-
+// Find which posts are already in user's history. This can only be done in
+// a background script because otherwise chrome.history not available.
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	var senderTab = sender.tab.id,
 		reqQuery = request.query,

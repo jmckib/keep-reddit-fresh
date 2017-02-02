@@ -3,23 +3,18 @@
       "scripts": [ "background.js" ]
    },
    "content_scripts": [ {
-      "css": [ "main.css" ],
       "js": [ "script.js" ],
       "matches": [ "http://reddit.com/", "https://reddit.com/", "http://*.reddit.com/", "https://*.reddit.com/", "http://*.reddit.com/r/*", "https://*.reddit.com/r/*", "http://*.reddit.com/r/*/*/", "https://*.reddit.com/r/*/*" ],
       "run_at": "document_end"
    } ],
-   "description": "Hide visited links with one click.",
+   "description": "Hide visited reddit posts.",
    "icons": {
-      "48": "reddit.png"
+      "48": "reddit_icon_48.png",
+      "128": "reddit_icon_128.png"
    },
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv6UvPjDbRTnEF5K+H6YBtNJfpp1Yn2xqzeAJkLfWASFOP0dJZjim7he/ZQCrIcP20OGwHRvdzdrN9AXxBE161aFqej5v3e61hhHiLhiBUBMZLmJp/LhhbzpKO8ZctB2DMvKllSs/P5SNE7FJ6QKvC4L5lm2DzNp+6BdHFzeZKnLpzD3O4tOkvJ9uYvaCMQ6OyHT4dfUqnZfYLkQ5/fr+g/wUKQMtlsdaxpG78QQ6DpQ5XMxE6wpGas57nrLaoSHYcvf8HfFCdnJub39nrxxCpOpBXUMcbiFXu2r29Md6bRkPm2+Abxe4TJbdcedT3ypRZuEZdt+y1vQ71hNG1HpmkwIDAQAB",
    "manifest_version": 2,
    "name": "Reddit hide visited",
-   "options_page": "options.html",
-   "page_action": {
-      "default_icon": "reddit.png",
-      "default_title": "Click to hide visited links"
-   },
-   "permissions": [ "tabs", "history", "storage", "http://reddit.com/*", "https://reddit.com/*", "http://*.reddit.com/*", "https://*.reddit.com/*" ],
+   "permissions": [ "tabs", "history", "http://reddit.com/*", "https://reddit.com/*", "http://*.reddit.com/*", "https://*.reddit.com/*" ],
    "version": "1.2.1"
 }
