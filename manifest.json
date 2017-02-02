@@ -14,7 +14,7 @@
    },
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv6UvPjDbRTnEF5K+H6YBtNJfpp1Yn2xqzeAJkLfWASFOP0dJZjim7he/ZQCrIcP20OGwHRvdzdrN9AXxBE161aFqej5v3e61hhHiLhiBUBMZLmJp/LhhbzpKO8ZctB2DMvKllSs/P5SNE7FJ6QKvC4L5lm2DzNp+6BdHFzeZKnLpzD3O4tOkvJ9uYvaCMQ6OyHT4dfUqnZfYLkQ5/fr+g/wUKQMtlsdaxpG78QQ6DpQ5XMxE6wpGas57nrLaoSHYcvf8HfFCdnJub39nrxxCpOpBXUMcbiFXu2r29Md6bRkPm2+Abxe4TJbdcedT3ypRZuEZdt+y1vQ71hNG1HpmkwIDAQAB",
    "manifest_version": 2,
-   "name": "Reddit hide visited",
+   "name": "Keep Reddit Fresh",
    "permissions": [ "tabs", "history", "http://reddit.com/*", "https://reddit.com/*", "http://*.reddit.com/*", "https://*.reddit.com/*" ],
-   "version": "1.2.1"
+   "version": "1.0"
 }
