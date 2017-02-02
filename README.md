@@ -13,3 +13,8 @@ You can still manually click the 'hide' button for posts that you don't
 want to bother visiting. There are also a couple settings at https://www.reddit.com/prefs/
 that can hide submissions that you've upvoted or downvoted, but that's less useful
 if you have this extension installed.
+
+Thanks to https://github.com/gavin19/reddit-hide-visited which this project
+was originally forked from. That extension hides posts when you click on the extension icon,
+while this one hides posts automatically when reddit is loaded or when RES never ending
+scroll loads a page.
